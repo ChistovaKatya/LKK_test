@@ -1,0 +1,4259 @@
+{
+	"info": {
+		"_postman_id": "0d3c971e-d305-4660-bfc8-80076f6dd574",
+		"name": "RUN_LKP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Авторизация",
+			"item": [
+				{
+					"name": "Discovery Endpoint Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"tests['response json contains authorization endpoint'] = _.has(responseJSON, 'authorization_endpoint');",
+									"tests['response json contains token endpoint'] = _.has(responseJSON, 'token_endpoint');",
+									"tests['response json contains introspection endpoint'] = _.has(responseJSON, 'introspection_endpoint');",
+									"tests['response json contains userinfo endpoint'] = _.has(responseJSON, 'userinfo_endpoint');",
+									"tests['response json contains revocation_endpoint'] = _.has(responseJSON, 'revocation_endpoint');",
+									"",
+									"pm.globals.set(\"AuthorizationEndpoint\", responseJSON.authorization_endpoint);",
+									"pm.globals.set(\"TokenEndpoint\", responseJSON.token_endpoint);",
+									"pm.globals.set(\"IntrospectionEndpoint\", responseJSON.introspection_endpoint);",
+									"pm.globals.set(\"UserInfoEndpoint\", responseJSON.userinfo_endpoint);",
+									"pm.globals.set(\"RevocationEndpoint\", responseJSON.revocation_endpoint);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://staging-mm.srvdev.ru/passenger/auth/.well-known/openid-configuration",
+							"protocol": "https",
+							"host": [
+								"staging-mm",
+								"srvdev",
+								"ru"
+							],
+							"path": [
+								"passenger",
+								"auth",
+								".well-known",
+								"openid-configuration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Discovery Endpoint",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{IdentityServerBaseUrl}}/.well-known/openid-configuration",
+									"host": [
+										"{{IdentityServerBaseUrl}}"
+									],
+									"path": [
+										".well-known",
+										"openid-configuration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 06 Aug 2019 15:54:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"issuer\": \"http://localhost:5000\",\n    \"jwks_uri\": \"http://localhost:5000/.well-known/openid-configuration/jwks\",\n    \"authorization_endpoint\": \"http://localhost:5000/connect/authorize\",\n    \"token_endpoint\": \"http://localhost:5000/connect/token\",\n    \"userinfo_endpoint\": \"http://localhost:5000/connect/userinfo\",\n    \"end_session_endpoint\": \"http://localhost:5000/connect/endsession\",\n    \"check_session_iframe\": \"http://localhost:5000/connect/checksession\",\n    \"revocation_endpoint\": \"http://localhost:5000/connect/revocation\",\n    \"introspection_endpoint\": \"http://localhost:5000/connect/introspect\",\n    \"device_authorization_endpoint\": \"http://localhost:5000/connect/deviceauthorization\",\n    \"frontchannel_logout_supported\": true,\n    \"frontchannel_logout_session_supported\": true,\n    \"backchannel_logout_supported\": true,\n    \"backchannel_logout_session_supported\": true,\n    \"scopes_supported\": [\n        \"openid\",\n        \"profile\",\n        \"api1\",\n        \"offline_access\"\n    ],\n    \"claims_supported\": [\n        \"sub\",\n        \"name\",\n        \"family_name\",\n        \"given_name\",\n        \"middle_name\",\n        \"nickname\",\n        \"preferred_username\",\n        \"profile\",\n        \"picture\",\n        \"website\",\n        \"gender\",\n        \"birthdate\",\n        \"zoneinfo\",\n        \"locale\",\n        \"updated_at\"\n    ],\n    \"grant_types_supported\": [\n        \"authorization_code\",\n        \"client_credentials\",\n        \"refresh_token\",\n        \"implicit\",\n        \"password\",\n        \"urn:ietf:params:oauth:grant-type:device_code\"\n    ],\n    \"response_types_supported\": [\n        \"code\",\n        \"token\",\n        \"id_token\",\n        \"id_token token\",\n        \"code id_token\",\n        \"code token\",\n        \"code id_token token\"\n    ],\n    \"response_modes_supported\": [\n        \"form_post\",\n        \"query\",\n        \"fragment\"\n    ],\n    \"token_endpoint_auth_methods_supported\": [\n        \"client_secret_basic\",\n        \"client_secret_post\"\n    ],\n    \"subject_types_supported\": [\n        \"public\"\n    ],\n    \"id_token_signing_alg_values_supported\": [\n        \"RS256\"\n    ],\n    \"code_challenge_methods_supported\": [\n        \"plain\",\n        \"S256\"\n    ],\n    \"request_parameter_supported\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Request Token Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"tests['response json contains access token'] = _.has(responseJSON, 'access_token');",
+									"tests['response json contains refresh token'] = _.has(responseJSON, 'refresh_token');",
+									"",
+									"var AccessToken = responseJSON.access_token;",
+									"tests['response json Accesstoken'] = AccessToken != \"NULL\";",
+									"",
+									"pm.globals.set(\"AccessToken\", responseJSON.access_token);",
+									"pm.globals.set(\"RefreshToken\", responseJSON.refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{ClientId}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{ClientSecret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{UserName}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{UserPassword}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{TokenEndpoint}}",
+							"host": [
+								"{{TokenEndpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Изображение в профиле",
+			"item": [
+				{
+					"name": "Сохраняет файл изображения пользователя Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"    \r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/aloginov/Pictures/2021-11-22_18h06_06.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/accounts/v1.0/user/photo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"v1.0",
+								"user",
+								"photo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/v1.0/user/photo",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"v1.0",
+										"user",
+										"photo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получает информацию о пользователе Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"\r",
+									"//tests['response json contains imageId'] = _.has(responseJSON.data, 'imageId');\r",
+									"\r",
+									"pm.globals.set(\"imageId\", responseJSON.data.imageId);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/accounts/v1.0/info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"v1.0",
+								"info"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/accounts/v1.0/info",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"v1.0",
+										"info"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Возвращает файл изображения пользователя Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/accounts/v1.0/user/photo?imageFileId={{imageId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"v1.0",
+								"user",
+								"photo"
+							],
+							"query": [
+								{
+									"key": "imageFileId",
+									"value": "{{imageId}}",
+									"description": "(Required) Идентификатор файла."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/accounts/v1.0/user/photo?imageFileId=ut dolore",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"v1.0",
+										"user",
+										"photo"
+									],
+									"query": [
+										{
+											"key": "imageFileId",
+											"value": "ut dolore"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Удаляет файл изображения пользователя Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/accounts/v1.0/user/photo/:imageFileId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"accounts",
+								"v1.0",
+								"user",
+								"photo",
+								":imageFileId"
+							],
+							"variable": [
+								{
+									"key": "imageFileId",
+									"value": "{{imageId}}",
+									"description": "(Required) Идентификатор файла."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/accounts/v1.0/user/photo/:imageFileId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"v1.0",
+										"user",
+										"photo",
+										":imageFileId"
+									],
+									"variable": [
+										{
+											"key": "imageFileId",
+											"value": "anim dolore fugiat laboris labore",
+											"description": "(Required) Идентификатор файла."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Привязка карты",
+			"item": [
+				{
+					"name": "Валидация транспортной карты. Получения данных о типе карты, возможности ее привязки и оплаты. Используется для непривязанный транспортных карт",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json contains cardNumber'] = _.has(responseJSON.data, 'linkTypes') != null;\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:cardNumber/validate?purpose=LINK",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":cardNumber",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "purpose",
+									"value": "LINK",
+									"description": "Цель валидации карты: PAYMENT - оплата, LINK - привязка. Значение по умолчанию: LINK"
+								}
+							],
+							"variable": [
+								{
+									"key": "cardNumber",
+									"value": "3931592715",
+									"description": "(Required) Номер транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:cardNumber/validate?purpose=PAYMENT",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":cardNumber",
+										"validate"
+									],
+									"query": [
+										{
+											"key": "purpose",
+											"value": "PAYMENT"
+										}
+									],
+									"variable": [
+										{
+											"key": "cardNumber",
+											"value": "ut dolore",
+											"description": "(Required) Номер транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Привязка носителя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"tests['response json contains imageId'] = _.has(responseJSON.data.card.card, 'linkedCardId');\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.globals.set(\"linkedCardId_bind\", responseJSON.data.card.card.linkedCardId);\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"troika_1\",\n    \"cardNumber\": \"3931592715\",\n    \"stationIds\": [\n        10224,\n        10224\n    ],\n    \"type\": \"LAST_STATIONS\",\n    \"phoneNumber\": \"79663097155\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/bind",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								"bind"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"esse aliquip cillum\",\n    \"cardNumber\": \"si\",\n    \"stationIds\": [\n        95847035,\n        -7649716\n    ],\n    \"type\": \"LAST_STATIONS\",\n    \"phoneNumber\": \"esse minim elit ad\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/bind",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										"bind"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Изменение названия привязанной транспортной карты",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId?name=troika_2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":linkedCardId"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "troika_2",
+									"description": "(Required) Новое название карты"
+								}
+							],
+							"variable": [
+								{
+									"key": "linkedCardId",
+									"value": "{{linkedCardId_bind}}",
+									"description": "(Required) Идентификатор транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId?name=ut dolore",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":linkedCardId"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "ut dolore"
+										}
+									],
+									"variable": [
+										{
+											"key": "linkedCardId",
+											"value": "ut dolore",
+											"description": "(Required) Идентификатор транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Отмена привязки носителя",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":linkedCardId"
+							],
+							"variable": [
+								{
+									"key": "linkedCardId",
+									"value": "{{linkedCardId_bind}}",
+									"description": "(Required) Идентификатор транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":linkedCardId"
+									],
+									"variable": [
+										{
+											"key": "linkedCardId",
+											"value": "ut dolore",
+											"description": "(Required) Идентификатор транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Работа с картой",
+			"item": [
+				{
+					"name": "Получение носителей витрины",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение носителя витрины",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "(Required) идентификатор носителя"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "62277604",
+											"description": "(Required) идентификатор носителя"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение списка банковских карт пользователя Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json LinkedCardId'] = _.has(responseJSON.data[0], 'linkedBankCardId') !== null;\r",
+									"pm.globals.set(\"linkedBankCardId\", responseJSON.data[0].linkedBankCardId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bankCards/v1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bankCards",
+								"v1.0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/bankCards/v1.0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"bankCards",
+										"v1.0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Просмотр информации о носителях пользователя. Получение списка носителей",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json LinkedCardId'] = _.has(responseJSON.data.cards[0].card, 'linkedCardId') !== null;\r",
+									"pm.globals.set(\"LinkedCardId\", responseJSON.data.cards[0].card.linkedCardId);\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/linked",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								"linked"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/linked",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										"linked"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Просмотр информации о носителе пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json LinkedCardId'] = _.has(responseJSON.data.card.card, 'cardNumber') !== null;\r",
+									"pm.globals.set(\"cardNumber\", responseJSON.data.card.card.cardNumber);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/linked/:linkedCardId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								"linked",
+								":linkedCardId"
+							],
+							"variable": [
+								{
+									"key": "linkedCardId",
+									"value": "{{LinkedCardId}}",
+									"description": "(Required) Идентификатор транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/linked/:linkedCardId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										"linked",
+										":linkedCardId"
+									],
+									"variable": [
+										{
+											"key": "linkedCardId",
+											"value": "ut dolore",
+											"description": "(Required) Идентификатор транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Валидация транспортной карты. Получения данных о типе карты, возможности ее оплаты. Используется для привязанных транспортных карт",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json contains cardNumber'] = _.has(responseJSON.data.card, 'cardNumber') !=null;\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId/validate/payment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":linkedCardId",
+								"validate",
+								"payment"
+							],
+							"variable": [
+								{
+									"key": "linkedCardId",
+									"value": "{{cardNumber}}",
+									"description": "(Required) Идентификатор транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId/validate/payment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":linkedCardId",
+										"validate",
+										"payment"
+									],
+									"variable": [
+										{
+											"key": "linkedCardId",
+											"value": "ut dolore",
+											"description": "(Required) Идентификатор транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Валидация транспортной карты. Получения данных о типе карты, возможности ее привязки и оплаты. Используется для непривязанный транспортных карт Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json contains cardNumber'] = _.has(responseJSON.data.card, 'cardNumber') !=null;\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:cardNumber/validate?purpose=PAYMENT",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":cardNumber",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "purpose",
+									"value": "PAYMENT",
+									"description": "Цель валидации карты: PAYMENT - оплата, LINK - привязка. Значение по умолчанию: LINK"
+								}
+							],
+							"variable": [
+								{
+									"key": "cardNumber",
+									"value": "{{cardNumber}}",
+									"description": "(Required) Номер транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:cardNumber/validate?purpose=PAYMENT",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":cardNumber",
+										"validate"
+									],
+									"query": [
+										{
+											"key": "purpose",
+											"value": "PAYMENT"
+										}
+									],
+									"variable": [
+										{
+											"key": "cardNumber",
+											"value": "ut dolore",
+											"description": "(Required) Номер транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Настройка автопополнения",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"linkedBankCardId\": {{linkedBankCardId}},\n    \"threshold\": 1000,\n    \"paymentSum\": 11,\n    \"mode\": \"enabled\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId/autoRecharge",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":linkedCardId",
+								"autoRecharge"
+							],
+							"variable": [
+								{
+									"key": "linkedCardId",
+									"value": "{{LinkedCardId}}",
+									"description": "(Required) Идентификатор транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"linkedBankCardId\": \"dolor non cupidatat mollit\",\n    \"threshold\": -54122127.568797484,\n    \"paymentSum\": 14051689.90014185,\n    \"mode\": \"Excepteur qui reprehenderit amet\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId/autoRecharge",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":linkedCardId",
+										"autoRecharge"
+									],
+									"variable": [
+										{
+											"key": "linkedCardId",
+											"value": "ut dolore",
+											"description": "(Required) Идентификатор транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Удаление информации о автопополнении",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId/autoRecharge",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"carriers",
+								"v1.0",
+								":linkedCardId",
+								"autoRecharge"
+							],
+							"variable": [
+								{
+									"key": "linkedCardId",
+									"value": "{{LinkedCardId}}",
+									"description": "(Required) Идентификатор транспортной карты"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/carriers/v1.0/:linkedCardId/autoRecharge",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"carriers",
+										"v1.0",
+										":linkedCardId",
+										"autoRecharge"
+									],
+									"variable": [
+										{
+											"key": "linkedCardId",
+											"value": "ut dolore",
+											"description": "(Required) Идентификатор транспортной карты"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение доступных для покупки билетов для виртуальной тройки",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/mobileTroika/v1.0/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"mobileTroika",
+								"v1.0",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/mobileTroika/v1.0/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"mobileTroika",
+										"v1.0",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение доступных для покупки билетов для виртуальной тройки Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/payments/v1.0/mobileTroika/tickets",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payments",
+								"v1.0",
+								"mobileTroika",
+								"tickets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/payments/v1.0/mobileTroika/tickets",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"payments",
+										"v1.0",
+										"mobileTroika",
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Итория операций/проходов",
+			"item": [
+				{
+					"name": "Получение истории операции Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"linkedCardIds\": [\n        \n    ],\n    \"linkedBankCardId\": [\n        \n    ],\n    \"operationTypes\": [\n        \n    ],\n    \"periodStartDateUtc\": null,\n    \"periodEndDateUtc\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/operations/v1.0?size=20&pageToken=",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"operations",
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "20",
+									"description": "количество на странице"
+								},
+								{
+									"key": "pageToken",
+									"value": "",
+									"description": "указатель на страницу, которую нужно показать. Если null, то показываем первую."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"linkedCardIds\": [\n        \"mollit ex q\",\n        \"dolor Duis culpa\"\n    ],\n    \"linkedBankCardId\": [\n        \"non cillum fugiat elit\",\n        \"sit consectetur nostrud sunt ipsum\"\n    ],\n    \"operationTypes\": [\n        \"cupidatat voluptate eiusmod in\",\n        \"ex sint sit adipisicing\"\n    ],\n    \"periodStartDateUtc\": 16488500,\n    \"periodEndDateUtc\": -56909207\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/operations/v1.0?size=20&pageToken=ut dolore",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"operations",
+										"v1.0"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "20"
+										},
+										{
+											"key": "pageToken",
+											"value": "ut dolore"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение истории поездок по номеру карты",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Variant",
+								"value": "nbs_v4_test",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/trips/v1.0/?size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"trips",
+								"v1.0",
+								""
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "20",
+									"description": "количество на странице"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/trips/v1.0?size=20&pageToken=ut dolore&linkedCardIds=labore cupidatat consequat&linkedCardIds=anim et nostrud magna&periodFrom=-79584955&periodTo=-79584955",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"trips",
+										"v1.0"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "20"
+										},
+										{
+											"key": "pageToken",
+											"value": "ut dolore"
+										},
+										{
+											"key": "linkedCardIds",
+											"value": "labore cupidatat consequat"
+										},
+										{
+											"key": "linkedCardIds",
+											"value": "anim et nostrud magna"
+										},
+										{
+											"key": "periodFrom",
+											"value": "-79584955"
+										},
+										{
+											"key": "periodTo",
+											"value": "-79584955"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Забытые вещи",
+			"item": [
+				{
+					"name": "Создание заявки о найденной / забытой вещи",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "details",
+									"value": "{\"additionalInfo\":\"test\",\"date\":1637701200000,\"itemName\":\"test\",\"stationId\":11679}",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "reporter",
+									"value": "{\"email\":\"test@test.ru\",\"name\":\"Test\",\"phone\":\"79663097155\"}",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "FORGOTTEN",
+									"description": "(Required) Тип обращения: FORGOTTEN - о потерянной вещи, FOUND - о найденной вещи (This can only be one of FORGOTTEN,FOUND)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appeals/forgottenThings/v1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"forgottenThings",
+								"v1.0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "details",
+											"value": "{\"additionalInfo\":\"id ea aliqua cupidatat officia\",\"date\":66040969,\"itemName\":\"fugiat in eiusmod veniam et\",\"stationId\":95880559}",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "reporter",
+											"value": "{\"email\":\"aute ex qui aliquip\",\"name\":\"eu\",\"phone\":\"Duis Excepteur \"}",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "FORGOTTEN",
+											"description": "(Required) Тип обращения: FORGOTTEN - о потерянной вещи, FOUND - о найденной вещи (This can only be one of FORGOTTEN,FOUND)",
+											"type": "text"
+										},
+										{
+											"key": "attachments",
+											"value": "[{\"name\":\"eu nisi Duis voluptate\",\"empty\":true,\"bytes\":[\"ipsum aliqua ex\",\"veniam\"],\"resource\":{\"url\":\"occaecat cupidatat incididunt pariatur sed\",\"readable\":true,\"open\":false,\"file\":\"cupidatat in cillum\",\"uri\":\"https://VnrFjoNDPsgLZsyrIjsDAd.jpffNCa2oaCa+vBwvUSgITstOSmnfALYW\",\"filename\":\"magna\",\"description\":\"cupidatat dolor mollit ea fugiat\",\"inputStream\":{}},\"size\":84183265,\"inputStream\":{},\"originalFilename\":\"et\",\"contentType\":\"irure mollit\"},{\"name\":\"deserunt sit veniam\",\"empty\":true,\"bytes\":[\"irure minim Ut quis ut\",\"id\"],\"resource\":{\"url\":\"fugiat officia\",\"readable\":true,\"open\":false,\"file\":\"consectetur aliqua est deserunt\",\"uri\":\"https://HVBcdzrukPwWcaReUGyLRrjSz.eljpk5MiI\",\"filename\":\"consequat esse ut\",\"description\":\"pariatur\",\"inputStream\":{}},\"size\":-74695367,\"inputStream\":{},\"originalFilename\":\"quis adipisicing culpa\",\"contentType\":\"irure ullamco ex labore\"},{\"name\":\"ut irure\",\"empty\":false,\"bytes\":[\"amet et incididunt proident consectetur\",\"qui adipisicing\"],\"resource\":{\"url\":\"velit Ut Lorem\",\"readable\":true,\"open\":true,\"file\":\"laborum fugiat\",\"uri\":\"http://RjL.yqlXE129b9VJsPT-0tGbE0dwVx45j1G8F7xWigNfuWjRhq.YoVY7+Sq1VS\",\"filename\":\"adipisicing qui\",\"description\":\"anim ipsum fugiat\",\"inputStream\":{}},\"size\":-6900069,\"inputStream\":{},\"originalFilename\":\"laborum\",\"contentType\":\"cillu\"}]",
+											"description": "Вложения",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appeals/forgottenThings/v1.0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"forgottenThings",
+										"v1.0"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение заявок о найденных / забытых вещах",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json forgottenThingsId'] = _.has(responseJSON.data.items[0], 'id');\r",
+									"console.log(responseJSON.data.items[0].id)\r",
+									"pm.globals.set(\"forgottenThingsId\", responseJSON.data.items[0].id);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/appeals/forgottenThings/v1.0?page=0&size=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"forgottenThings",
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "номер страницы"
+								},
+								{
+									"key": "size",
+									"value": "20",
+									"description": "количество на странице"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/appeals/forgottenThings/v1.0?page=0&size=20",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"forgottenThings",
+										"v1.0"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение заявки о найденной / забытой вещи",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "ut dolore"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appeals/forgottenThings/v1.0/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"forgottenThings",
+								"v1.0",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{forgottenThingsId}}",
+									"description": "(Required) id обращения"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "ut dolore"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/appeals/forgottenThings/v1.0/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"forgottenThings",
+										"v1.0",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "62277604",
+											"description": "(Required) id обращения"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Обращения",
+			"item": [
+				{
+					"name": "Создание заявки на сопровождение. НЕ РЕАЛИЗОВАН",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"tests['response json assistance'] = _.has(responseJSON.data, 'id');\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"details\": {\n        \"additionalInfo\": \"test\",\n        \"date\": 1637832120000,\n        \"departureStationId\": 10102,\n        \"destinationStationId\": 10347,\n        \"meetingPlaceInfo\": \"Test\"\n    },\n    \"reporter\": {\n        \"name\": \"Test\",\n        \"phone\": \"79663097155\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appeals/assistance/v1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"assistance",
+								"v1.0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"details\": {\n        \"additionalInfo\": \"eu co\",\n        \"date\": 60777202,\n        \"departureStationId\": 31702390,\n        \"destinationStationId\": 62089354,\n        \"meetingPlaceInfo\": \"consectetur consequat\"\n    },\n    \"reporter\": {\n        \"name\": \"fugiat\",\n        \"phone\": \"non Ut adipisicing occaecat ea\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appeals/assistance/v1.0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"assistance",
+										"v1.0"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Создание обращения",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "details",
+									"value": "{\"date\":1637701200000,\"descr\":\"Test\",\"summary\":\"Test\"}",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "reporter",
+									"value": "{\"address\":\"Test\",\"email\":\"test@test.ru\",\"name\":\"Test\",\"phone\":\"79663097155\"}",
+									"description": "(Required) ",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "COMPLAINT",
+									"description": "(Required) Тип: COMPLAINT - жалоба, OFFER - предложение, DECLARATION - заявление (This can only be one of COMPLAINT,OFFER,DECLARATION)",
+									"type": "text"
+								},
+								{
+									"key": "objects",
+									"value": "92,93,94,95,796",
+									"description": "Идентификаторы объектов категории",
+									"type": "text"
+								},
+								{
+									"key": "attachments",
+									"value": "[{\"name\":\"anim voluptate laboris\",\"empty\":true,\"bytes\":[\"do occaecat enim\",\"quis est\"],\"resource\":{\"url\":\"mollit qui sed\",\"readable\":false,\"open\":false,\"file\":\"commodo \",\"uri\":\"https://q.ppsJACpXsyi,sXvXaX3w9EPBoGP9Z2hf.jV5thn\",\"filename\":\"aute id aliqua\",\"description\":\"consequat\",\"inputStream\":{}},\"size\":87361668,\"inputStream\":{},\"originalFilename\":\"laborum\",\"contentType\":\"consectetur tempor ut incididunt\"},{\"name\":\"reprehenderit\",\"empty\":false,\"bytes\":[\"exercitation id qui\",\"non qu\"],\"resource\":{\"url\":\"est non voluptate\",\"readable\":false,\"open\":true,\"file\":\"incididunt consequat\",\"uri\":\"https://hIAzJgsfYOfjcxblBpNlLpCTW.mciovs+fnglFp36EmwnuKKlEKLFCqM-S4\",\"filename\":\"nisi do elit pariatur\",\"description\":\"ut magna anim cillum cupidatat\",\"inputStream\":{}},\"size\":2952739,\"inputStream\":{},\"originalFilename\":\"qui\",\"contentType\":\"aute sunt commodo repr\"}]",
+									"description": "Вложения",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "feedback",
+									"value": "EMAIL",
+									"description": "Информация о том, куда послать ответ заявителю",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appeals/v1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"v1.0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "details",
+											"value": "{\"date\":6336142,\"descr\":\"anim qui nisi ad\",\"summary\":\"id et tempor\"}",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "reporter",
+											"value": "{\"address\":\"consequat consectetur amet\",\"email\":\"minim exercitation reprehenderit velit\",\"name\":\"consequat\",\"phone\":\"magna veniam adipisicing fugiat\"}",
+											"description": "(Required) ",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "COMPLAINT",
+											"description": "(Required) Тип: COMPLAINT - жалоба, OFFER - предложение, DECLARATION - заявление (This can only be one of COMPLAINT,OFFER,DECLARATION)",
+											"type": "text"
+										},
+										{
+											"key": "objects",
+											"value": "[54309138]",
+											"description": "Идентификаторы объектов категории",
+											"type": "text"
+										},
+										{
+											"key": "attachments",
+											"value": "[{\"name\":\"qui proident commodo\",\"empty\":false,\"bytes\":[\"reprehenderit \",\"deserunt in aliquip\"],\"resource\":{\"url\":\"velit si\",\"readable\":true,\"open\":true,\"file\":\"non quis n\",\"uri\":\"https://jBQAeDe.ozvgu3vJ8EQuC.lycQoYkcvYyGk0LWr4vSw\",\"filename\":\"labore ex consequat Du\",\"description\":\"anim sint irure\",\"inputStream\":{}},\"size\":-73741576,\"inputStream\":{},\"originalFilename\":\"ut velit reprehenderit\",\"contentType\":\"sit\"},{\"name\":\"sed eiusmod dolor\",\"empty\":true,\"bytes\":[\"sint do ullamco nisi eiusmod\",\"consequat culpa do eu\"],\"resource\":{\"url\":\"consectetur\",\"readable\":false,\"open\":false,\"file\":\"Lorem ex culpa\",\"uri\":\"http://XHhJiRkoJCxNoksbUIARrpW.rfkktYbnxtkYK1BxggxrRs-FjkmwPgL+4Q4ckz\",\"filename\":\"sed ea\",\"description\":\"culpa veniam\",\"inputStream\":{}},\"size\":64933225,\"inputStream\":{},\"originalFilename\":\"deserunt dolore\",\"contentType\":\"cillum eiusmod\"}]",
+											"description": "Вложения",
+											"type": "text"
+										},
+										{
+											"key": "feedback",
+											"value": "[\"EMAIL\"]",
+											"description": "Информация о том, куда послать ответ заявителю",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/appeals/v1.0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"v1.0"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение обращений пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"tests['response json appeals'] = _.has(responseJSON.data.items[0], 'id');\r",
+									"console.log(responseJSON.data.items[0].id)\r",
+									"pm.globals.set(\"appeals\", responseJSON.data.items[0].id);\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/appeals/v1.0?page=0&size=20&searchByExtId=",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "номер страницы"
+								},
+								{
+									"key": "size",
+									"value": "20",
+									"description": "количество на странице"
+								},
+								{
+									"key": "searchByExtId",
+									"value": "",
+									"description": "поиск по идентификатору обращения ЕСОО"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/appeals/v1.0?page=0&size=20&searchByExtId=ut dolore",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"v1.0"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "20"
+										},
+										{
+											"key": "searchByExtId",
+											"value": "ut dolore"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение обращения",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/appeals/v1.0/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"v1.0",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{appeals}}",
+									"description": "(Required) id обращения"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/appeals/v1.0/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"v1.0",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "62277604",
+											"description": "(Required) id обращения"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Получение справочника маршрутизации",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJSON;\r",
+									"try { \r",
+									"    responseJSON = JSON.parse(responseBody); \r",
+									"    tests['response is valid JSON'] = true;\r",
+									"}\r",
+									"catch (e) { \r",
+									"    responseJSON = {}; \r",
+									"    tests['response is valid JSON'] = false;\r",
+									"}\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/appeals/v1.0/map",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appeals",
+								"v1.0",
+								"map"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "default response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: apikey",
+										"key": "Application",
+										"value": "<API Key>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/appeals/v1.0/map",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"appeals",
+										"v1.0",
+										"map"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Получение живой ленты Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"tests['response json votes'] = _.has(responseJSON.data.votes[0], 'id');\r",
+							"tests['response json offers'] = _.has(responseJSON.data.offers[0], 'id');\r",
+							"pm.globals.set(\"votes_id\", responseJSON.data.votes[0].id);\r",
+							"pm.globals.set(\"offers_id\", responseJSON.data.offers[0].id);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/feeds/v1.0?page=0&size=20&filter=&retrieveBody=true &retrieveOfferBody=true ",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feeds",
+						"v1.0"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0",
+							"description": "номер страницы"
+						},
+						{
+							"key": "size",
+							"value": "20",
+							"description": "количество на странице"
+						},
+						{
+							"key": "filter",
+							"value": "",
+							"description": "получить из выборки часть: VOTE - опросы, OFFER - спецпредложения, NOTIFICATION - уведомления. Для получение всех частей отправляется null"
+						},
+						{
+							"key": "retrieveBody",
+							"value": "true ",
+							"description": "получать уведомления с телом: true - да, false - нет. По умолчанию false"
+						},
+						{
+							"key": "retrieveOfferBody",
+							"value": "true ",
+							"description": "получать спецпредложения с описанием: true - да, false - нет. По умолчанию false"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/feeds/v1.0?page=0&size=20&filter=VOTE&retrieveBody=false&retrieveOfferBody=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"feeds",
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "filter",
+									"value": "VOTE"
+								},
+								{
+									"key": "retrieveBody",
+									"value": "false"
+								},
+								{
+									"key": "retrieveOfferBody",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение вопросов опроса Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/feeds/votes/v1.0/:id/questions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feeds",
+						"votes",
+						"v1.0",
+						":id",
+						"questions"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{votes_id}}",
+							"description": "(Required) id опроса"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/feeds/votes/v1.0/:id/questions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"feeds",
+								"votes",
+								"v1.0",
+								":id",
+								"questions"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62277604",
+									"description": "(Required) id опроса"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение спецпредложения Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/feeds/offers/v1.0/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"feeds",
+						"offers",
+						"v1.0",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{offers_id}}",
+							"description": "(Required) id спецпредложения"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/feeds/offers/v1.0/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"feeds",
+								"offers",
+								"v1.0",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62277604",
+									"description": "(Required) id спецпредложения"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение политик безопасности пароля Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"    \r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"tests['response json contains cardNumber'] = _.has(responseJSON.data, 'description') !=null;\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/registrations/v1.0/passwordPolicy",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"registrations",
+						"v1.0",
+						"passwordPolicy"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/registrations/v1.0/passwordPolicy",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registrations",
+								"v1.0",
+								"passwordPolicy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение мест касс и терминалов, входящих в радиус отдаления от исходной точки",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"    \r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/places/v1.0/search?lat=61328696.367396295&lon=61328696.367396295&rad=61328696.367396295&filter=BUY_TICKET&filter=DOWN_LOYALTY",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"places",
+						"v1.0",
+						"search"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "61328696.367396295",
+							"description": "(Required) широта (градусы)"
+						},
+						{
+							"key": "lon",
+							"value": "61328696.367396295",
+							"description": "(Required) долгота (градусы)"
+						},
+						{
+							"key": "rad",
+							"value": "61328696.367396295",
+							"description": "(Required) радиус отдаления (км)"
+						},
+						{
+							"key": "filter",
+							"value": "BUY_TICKET",
+							"description": "фильтрация: BUY_TICKET - покупка билетов\n\tUP_BALANCE - пополнение баланса\n\tWRITE_CARD - запись на карту\n\tUP_LOYALTY - пополнение баллов\n\tDOWN_LOYALTY - списание баллов. Если не указан тип (типы), то вернется пустой массив."
+						},
+						{
+							"key": "filter",
+							"value": "DOWN_LOYALTY",
+							"description": "фильтрация: BUY_TICKET - покупка билетов\n\tUP_BALANCE - пополнение баланса\n\tWRITE_CARD - запись на карту\n\tUP_LOYALTY - пополнение баллов\n\tDOWN_LOYALTY - списание баллов. Если не указан тип (типы), то вернется пустой массив."
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/places/v1.0/search?lat=61328696.367396295&lon=61328696.367396295&rad=61328696.367396295&filter=BUY_TICKET&filter=DOWN_LOYALTY",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places",
+								"v1.0",
+								"search"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "61328696.367396295"
+								},
+								{
+									"key": "lon",
+									"value": "61328696.367396295"
+								},
+								{
+									"key": "rad",
+									"value": "61328696.367396295"
+								},
+								{
+									"key": "filter",
+									"value": "BUY_TICKET"
+								},
+								{
+									"key": "filter",
+									"value": "DOWN_LOYALTY"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение станции метро",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"tests['response json icon'] = _.has(responseJSON.data[0], 'icon');\r",
+							"s = responseJSON.data[0].icon.split('/')[4]\r",
+							"pm.globals.set(\"iconId\", s);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ut dolore"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/metro/v1.0/stations",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"metro",
+						"v1.0",
+						"stations"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ut dolore"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/metro/v1.0/stations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"metro",
+								"v1.0",
+								"stations"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение списка станций билетной системы",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ut dolore"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/references/v1.0/stations",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"references",
+						"v1.0",
+						"stations"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ut dolore"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/references/v1.0/stations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"references",
+								"v1.0",
+								"stations"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение протокола авторизации внешних сервисов",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/externals/v1.0?redirectUri=https://staging-mm.srvdev.ru/&state=ut&codeChallenge=z_toxJ3cQC5tXyg1eyM4qYPPT53_VXxm2y1ZD9-WNiQ&codeChallengeMethod=S256&theme=light&clientId={{ClientId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"externals",
+						"v1.0"
+					],
+					"query": [
+						{
+							"key": "redirectUri",
+							"value": "https://staging-mm.srvdev.ru/",
+							"description": "URL для возврата результата авторизации (параметр redirect_uri в протоколе OAuth 2.0)"
+						},
+						{
+							"key": "state",
+							"value": "ut",
+							"description": "Состояние процесса от клиента, можно применять для защиты от CSRF атак (параметр state в протоколе OAuth 2.0)"
+						},
+						{
+							"key": "codeChallenge",
+							"value": "z_toxJ3cQC5tXyg1eyM4qYPPT53_VXxm2y1ZD9-WNiQ",
+							"description": "Сгенерированный код (параметр code_challenge в протоколе OAuth 2.0 + PKCE). Генерируется из значения параметра code_verifier в протоколе OAuth 2.0 + PKCE"
+						},
+						{
+							"key": "codeChallengeMethod",
+							"value": "S256",
+							"description": "Метод, которым был зашифрован сгенерированный код (параметр code_challenge_method в протоколе OAuth 2.0 + PKCE). Возможные значения: S256 - метод SHA256"
+						},
+						{
+							"key": "theme",
+							"value": "light",
+							"description": "Цветовая тема страницы авторизации."
+						},
+						{
+							"key": "clientId",
+							"value": "{{ClientId}}",
+							"description": "Идентификатор клиента."
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/externals/v1.0?redirectUri=ut dolore&state=ut dolore&codeChallenge=ut dolore&codeChallengeMethod=ut dolore&theme=light&clientId=ut dolore",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"externals",
+								"v1.0"
+							],
+							"query": [
+								{
+									"key": "redirectUri",
+									"value": "ut dolore"
+								},
+								{
+									"key": "state",
+									"value": "ut dolore"
+								},
+								{
+									"key": "codeChallenge",
+									"value": "ut dolore"
+								},
+								{
+									"key": "codeChallengeMethod",
+									"value": "ut dolore"
+								},
+								{
+									"key": "theme",
+									"value": "light"
+								},
+								{
+									"key": "clientId",
+									"value": "ut dolore"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получение настроек приложений",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON;\r",
+							"\r",
+							"try { \r",
+							"    responseJSON = JSON.parse(responseBody); \r",
+							"    tests['response is valid JSON'] = true;\r",
+							"}\r",
+							"catch (e) { \r",
+							"    responseJSON = {}; \r",
+							"    tests['response is valid JSON'] = false;\r",
+							"}\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/settings/v1.0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"settings",
+						"v1.0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/settings/v1.0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"settings",
+								"v1.0"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Скачивание файла изображения",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/files/v1.0/download/:fileId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"files",
+						"v1.0",
+						"download",
+						":fileId"
+					],
+					"variable": [
+						{
+							"key": "fileId",
+							"value": "{{iconId}}",
+							"description": "(Required) идентификатор изображения"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "default response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "Application",
+								"value": "<API Key>"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/files/v1.0/download/:fileId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"files",
+								"v1.0",
+								"download",
+								":fileId"
+							],
+							"variable": [
+								{
+									"key": "fileId",
+									"value": "ut dolore",
+									"description": "(Required) идентификатор изображения"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Проход",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment=require ('moment');\r",
+							"pm.globals.set('CurrentDateTimeUtc', (moment().format(\"YYYY-MM-DD hh:mm:ss\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://crd.btmd.ru/?place=821&time={{CurrentDateTimeUtc}}&num=3931592715&pass=4414",
+					"protocol": "https",
+					"host": [
+						"crd",
+						"btmd",
+						"ru"
+					],
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "place",
+							"value": "821"
+						},
+						{
+							"key": "time",
+							"value": "{{CurrentDateTimeUtc}}"
+						},
+						{
+							"key": "num",
+							"value": "3931592715"
+						},
+						{
+							"key": "pass",
+							"value": "4414"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AccessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://staging-mm.srvdev.ru/passenger/api"
+		},
+		{
+			"key": "ClientId",
+			"value": "f1dac608-dd35-4717-8cbb-18e2f7a1d522"
+		},
+		{
+			"key": "ClientSecret",
+			"value": "the_secret"
+		},
+		{
+			"key": "UserName",
+			"value": "79663097155"
+		},
+		{
+			"key": "UserPassword",
+			"value": "Test1234"
+		},
+		{
+			"key": "ApiName",
+			"value": "nbs.ppa.api"
+		},
+		{
+			"key": "ApiSecret",
+			"value": "the_secret"
+		}
+	]
+}
