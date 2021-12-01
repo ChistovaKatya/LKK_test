@@ -272,6 +272,7 @@
         {
           "listen": "test",
           "script": {
+            "id": "eeebd150-0417-49ae-a12e-831ec9b08dfc",
             "exec": [
               "pm.test(\"Статус \" + responseCode.code, function () {\r",
               "    pm.response.to.have.status(200)\r",
@@ -285,8 +286,7 @@
               "       }\r",
               "});"
             ],
-            "type": "text/javascript",
-            "id": "eeebd150-0417-49ae-a12e-831ec9b08dfc"
+            "type": "text/javascript"
           }
         }
       ],
@@ -309,7 +309,7 @@
             "value": "{{coop}}"
           }
         ],
-        "url": "{{baseUrl}}/v1/requestsForBapTesting/issuers/model"
+        "url": "{{baseUrl}}/v1/requestsForBapTesting/carriers/model"
       },
       "response": [
         {
@@ -17266,12 +17266,12 @@
   ],
   "variable": [
     {
-      "id": "a6e9d9f8-02b6-4ce2-a3ae-ed65024a0be8",
+      "id": "fb6c37a8-f359-4d9b-b640-6174975c2669",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "29f28144-538c-47ba-9eb5-d42159a05ead",
+      "id": "4759b843-db61-4091-a296-3cbc2afc172d",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
