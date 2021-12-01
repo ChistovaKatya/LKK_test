@@ -99,7 +99,7 @@
               "            tests [\"Информация получена\"] = true\r",
               "     }       \r",
               "       else {\r",
-              "           tests [\"Страница пустая@\"] = false\r",
+              "           tests [\"Страница пустая\"] = false\r",
               "       }\r",
               "});"
             ],
@@ -17266,12 +17266,12 @@
   ],
   "variable": [
     {
-      "id": "8498bfac-96d6-4a57-b242-c5ddcce25392",
+      "id": "a6e9d9f8-02b6-4ce2-a3ae-ed65024a0be8",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "3ca18b30-580e-4ad6-8902-59bcfc1be3a7",
+      "id": "29f28144-538c-47ba-9eb5-d42159a05ead",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
