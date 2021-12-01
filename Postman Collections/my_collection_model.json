@@ -3749,6 +3749,7 @@
         {
           "listen": "test",
           "script": {
+            "id": "703dec96-73b9-4d40-b19e-a71878121c86",
             "exec": [
               "pm.test(\"Статус \" + responseCode.code, function () {\r",
               "    pm.response.to.have.status(200)\r",
@@ -3762,8 +3763,7 @@
               "       }\r",
               "});"
             ],
-            "type": "text/javascript",
-            "id": "703dec96-73b9-4d40-b19e-a71878121c86"
+            "type": "text/javascript"
           }
         }
       ],
@@ -3786,7 +3786,7 @@
             "value": "{{coop}}"
           }
         ],
-        "url": "{{baseUrl}}/v1/salesAgent/pointsOfSale/model"
+        "url": "{{baseUrl}}/v1/salesAgent/pointsOfSales/model"
       },
       "response": [
         {
@@ -17083,12 +17083,12 @@
   ],
   "variable": [
     {
-      "id": "257a1259-4dce-4f36-b6a4-bdd78c27d972",
+      "id": "082c95c2-fa93-47a7-a1ee-3b386d993be7",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "697f15c0-3c1a-4ac3-b030-907e3d94203a",
+      "id": "e8ddb7ae-0c14-4e82-95fa-74f79f94eedd",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
