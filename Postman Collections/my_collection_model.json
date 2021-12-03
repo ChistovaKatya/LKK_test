@@ -17514,6 +17514,372 @@
           "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
         }
       ]
+    },
+    {
+      "name": "Получение перечня типов уведомлений.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1274b978-6543-4e93-80a0-bb0cb9682165",
+            "exec": [
+              "pm.test(\"Статус \" + responseCode.code, function () {\r",
+              "    pm.response.to.have.status(200)\r",
+              "    var jsonData = pm.response.json();\r",
+              "  if (!jsonData.isEmpty)\r",
+              "       {\r",
+              "            tests [\"Информация получена\"] = true\r",
+              "     }       \r",
+              "       else {\r",
+              "           tests [\"Страница пустая\"] = false\r",
+              "       }\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "744943a3-53cb-4e4a-af11-22bdb9775692",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{token}}"
+          }
+        },
+        "method": "GET",
+        "header": [
+          {
+            "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+            "key": "cooperation-id",
+            "value": "{{coop}}"
+          }
+        ],
+        "url": "{{baseUrl}}/v1/notifications/incoming/notificationType/model"
+      },
+      "response": [
+        {
+          "id": "106dd5da-d199-475c-93f3-c3859777c4be",
+          "name": "Ответ на запрос.",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/notifications/incoming/notificationType/model"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"items\": [\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n ]\n}"
+        },
+        {
+          "id": "dd190652-13d3-4206-b83b-0d6a60c5d7c7",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/notifications/incoming/notificationType/model"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"title\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"status\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"detail\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"instance\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"extensions\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"errors\": {}\n}"
+        },
+        {
+          "id": "e48714da-e663-49f6-9755-8d1c8c6079ee",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/notifications/incoming/notificationType/model"
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        },
+        {
+          "id": "2ebd29f0-4406-4343-8caf-a9005ad988e3",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/notifications/incoming/notificationType/model"
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        },
+        {
+          "id": "a9b0ed92-c4f2-43b7-82a3-eda116d92c2f",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/notifications/incoming/notificationType/model"
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        }
+      ]
+    },
+    {
+      "name": "Получение информации для загрузки счета от контрагента.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "21552a7a-3322-42a5-8818-3672c0719910",
+            "exec": [
+              "pm.test(\"Статус \" + responseCode.code, function () {\r",
+              "    pm.response.to.have.status(200)\r",
+              "    var jsonData = pm.response.json();\r",
+              "  if (!jsonData.isEmpty)\r",
+              "       {\r",
+              "            tests [\"Информация получена\"] = true\r",
+              "     }       \r",
+              "       else {\r",
+              "           tests [\"Страница пустая\"] = false\r",
+              "       }\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "36e47658-718c-4cc2-8f9e-6f4d420a96e3",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{token}}"
+          }
+        },
+        "method": "GET",
+        "header": [
+          {
+            "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+            "key": "cooperation-id",
+            "value": "{{coop}}"
+          }
+        ],
+        "url": "{{baseUrl}}/v1/invoices/outgoing/add/model"
+      },
+      "response": [
+        {
+          "id": "5c8d9eac-0c0f-47f7-980f-3bdf6766a1e9",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/add/model"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"contracts\": [\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n ],\n \"uploadFileSettings\": [\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n ]\n}"
+        },
+        {
+          "id": "602cbbe1-e7b8-414e-9bfd-8b79f3750bcc",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/add/model"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"title\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"status\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"detail\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"instance\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"extensions\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"errors\": {}\n}"
+        },
+        {
+          "id": "d85f9915-0005-4682-8497-a1ae3d78814c",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/add/model"
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        },
+        {
+          "id": "0506faf4-50f2-4e55-9b9d-ce6cc12a4c98",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/add/model"
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        },
+        {
+          "id": "56f03f28-f775-430c-a971-91502cce4be5",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/add/model"
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        }
+      ]
     }
   ],
   "event": [
@@ -17540,12 +17906,12 @@
   ],
   "variable": [
     {
-      "id": "d43bdd65-7339-46e9-b16e-91c4b30edc81",
+      "id": "08bc14e0-3227-49d4-aaf2-d948f11bfe67",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "45c92675-6a00-4633-b094-3d8947f19435",
+      "id": "370eaeb6-1b6a-47bd-96d4-ce40baf4ea2b",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
