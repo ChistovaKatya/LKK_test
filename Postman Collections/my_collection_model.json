@@ -17357,12 +17357,12 @@
   ],
   "variable": [
     {
-      "id": "d8288de2-3c0b-40e1-a1cb-217982e5c92f",
+      "id": "8276a057-14da-416f-b7fd-295c1b5cc937",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "e8417dab-a0e1-4b77-9096-a0de6903afb9",
+      "id": "79db3be7-1d96-415b-9be0-ad15dcaf6b6c",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
