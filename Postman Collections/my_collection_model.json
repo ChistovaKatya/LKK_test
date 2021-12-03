@@ -16900,12 +16900,12 @@
   ],
   "variable": [
     {
-      "id": "64bef4af-b9b7-4998-8cb6-5da2d4cec4cc",
+      "id": "0981382b-b23b-47e9-8fcd-d59cc39bd4db",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "18ba0208-555d-4b69-8ce8-17a990bf1351",
+      "id": "24963118-973a-4d66-ad35-415bb083ba16",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
