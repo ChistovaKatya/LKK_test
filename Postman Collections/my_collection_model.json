@@ -17880,6 +17880,189 @@
           "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
         }
       ]
+    },
+    {
+      "name": "Получение информации для редактирования счета от контрагента.",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "74b5969d-08f9-403c-8f57-8a9d9a5dc958",
+            "exec": [
+              "pm.test(\"Статус \" + responseCode.code, function () {\r",
+              "    pm.response.to.have.status(200)\r",
+              "    var jsonData = pm.response.json();\r",
+              "  if (!jsonData.isEmpty)\r",
+              "       {\r",
+              "            tests [\"Информация получена\"] = true\r",
+              "     }       \r",
+              "       else {\r",
+              "           tests [\"Страница пустая\"] = false\r",
+              "       }\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "b4719bf4-6b0e-4430-a093-6646b1616bef",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "token": "{{token}}"
+          }
+        },
+        "method": "GET",
+        "header": [
+          {
+            "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+            "key": "cooperation-id",
+            "value": "{{coop}}"
+          }
+        ],
+        "url": "{{baseUrl}}/v1/invoices/outgoing/edit/model"
+      },
+      "response": [
+        {
+          "id": "69d9584b-ff1b-4793-af9f-a0c0f7c38eb9",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/edit/model"
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"uploadFileSettings\": [\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n ]\n}"
+        },
+        {
+          "id": "01669551-4a87-446e-a9e4-b5708adca718",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/edit/model"
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"title\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"status\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"detail\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"instance\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"extensions\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"errors\": {}\n}"
+        },
+        {
+          "id": "42381045-e3c7-4696-be26-4691129d127a",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/edit/model"
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        },
+        {
+          "id": "01a27880-20ce-43af-8303-6f59e20f885d",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/edit/model"
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        },
+        {
+          "id": "a875ba5a-7383-4caa-9a9d-bf329397ab98",
+          "name": "Untitled Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
+                "key": "cooperation-id",
+                "value": ""
+              }
+            ],
+            "url": "{{baseUrl}}/v1/invoices/outgoing/edit/model"
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "cookie": [],
+          "responseTime": null,
+          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
+        }
+      ]
     }
   ],
   "event": [
@@ -17906,12 +18089,12 @@
   ],
   "variable": [
     {
-      "id": "532a0cae-dfd6-44a7-b26b-e31b1755ca76",
+      "id": "e1eaad3c-5c88-4f65-a202-ef56076ba3dd",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "f244225d-e6cf-4108-ba0f-56243364c917",
+      "id": "34bc908b-298f-4852-a424-2c9b0bc8b9d0",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
