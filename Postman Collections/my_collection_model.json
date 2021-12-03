@@ -18272,12 +18272,12 @@
   ],
   "variable": [
     {
-      "id": "574de109-cc4a-42e8-acda-b38cb435c891",
+      "id": "56c22ea4-0487-4c77-8f14-7cb84ff8a73c",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "c4552f30-a464-4314-a502-2a3099c560ab",
+      "id": "ac273df1-5702-4117-b221-812b8153666c",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
