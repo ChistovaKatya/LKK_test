@@ -81,7 +81,7 @@
           "script": {
             "id": "f3292ac1-caf5-4196-b13b-81347840f95a",
             "exec": [
-              "pm.globals.set(\"coop\", 1000001);"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -18459,12 +18459,12 @@
   ],
   "variable": [
     {
-      "id": "cd6ede6c-8187-4ef0-87a9-bb118c0b81f5",
+      "id": "ca02cca7-8a60-4124-a41b-07977646121d",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "df07f19e-37b1-4126-8fcd-f4ea7c1bcc33",
+      "id": "9569a388-2824-44f0-8b40-85ab472de753",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
