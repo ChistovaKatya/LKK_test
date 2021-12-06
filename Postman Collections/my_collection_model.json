@@ -435,21 +435,11 @@
         {
           "listen": "test",
           "script": {
+            "id": "3e0e67dc-e2f7-4ec7-9162-ba057dfffae2",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
-            "type": "text/javascript",
-            "id": "3e0e67dc-e2f7-4ec7-9162-ba057dfffae2"
+            "type": "text/javascript"
           }
         }
       ],
@@ -618,21 +608,11 @@
         {
           "listen": "test",
           "script": {
+            "id": "41286d70-0322-4c4c-bfb0-05cb5135bea9",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
-            "type": "text/javascript",
-            "id": "41286d70-0322-4c4c-bfb0-05cb5135bea9"
+            "type": "text/javascript"
           }
         }
       ],
@@ -801,21 +781,11 @@
         {
           "listen": "test",
           "script": {
+            "id": "7e42e8bb-8d62-41c7-bf41-98e3c2119f8e",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
-            "type": "text/javascript",
-            "id": "7e42e8bb-8d62-41c7-bf41-98e3c2119f8e"
+            "type": "text/javascript"
           }
         }
       ],
@@ -16673,280 +16643,6 @@
       ]
     },
     {
-      "name": "Получение информации для работы с реестром дополнительных соглашений.",
-      "id": "79b3acea-cc17-491f-97f2-b94ecc905628",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "oauth2",
-          "oauth2": {}
-        },
-        "method": "GET",
-        "header": [
-          {
-            "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
-            "key": "cooperation-id",
-            "value": ""
-          }
-        ],
-        "url": {
-          "raw": "{{baseUrl}}/v1/contracts/:id/additionalAgreements/model",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "v1",
-            "contracts",
-            ":id",
-            "additionalAgreements",
-            "model"
-          ],
-          "variable": [
-            {
-              "id": "58d90e86-da3a-4af4-892b-53ac5580a6af",
-              "key": "id",
-              "value": "-94312627",
-              "description": "(Required) Идентификатор договора."
-            }
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "88740895-b1fd-4d35-a5b5-719af38389cd",
-          "name": "Untitled Example",
-          "originalRequest": {
-            "method": "GET",
-            "header": [
-              {
-                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
-                "key": "cooperation-id",
-                "value": ""
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/v1/contracts/:id/additionalAgreements/model",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "v1",
-                "contracts",
-                ":id",
-                "additionalAgreements",
-                "model"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "-94312627",
-                  "description": "(Required) Идентификатор договора."
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "cookie": [],
-          "responseTime": null,
-          "body": "{\n \"statuses\": [\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  },\n  {\n   \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n  }\n ],\n \"contractName\": \"laborum occaecat dolore Duis aute\"\n}"
-        },
-        {
-          "id": "dd0c0ac1-fec8-41f4-8912-79ddce3e7167",
-          "name": "Untitled Example",
-          "originalRequest": {
-            "method": "GET",
-            "header": [
-              {
-                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
-                "key": "cooperation-id",
-                "value": ""
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/v1/contracts/:id/additionalAgreements/model",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "v1",
-                "contracts",
-                ":id",
-                "additionalAgreements",
-                "model"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "-94312627",
-                  "description": "(Required) Идентификатор договора."
-                }
-              ]
-            }
-          },
-          "status": "Bad Request",
-          "code": 400,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "cookie": [],
-          "responseTime": null,
-          "body": "{\n \"type\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"title\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"status\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"detail\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"instance\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"extensions\": {\n  \"value\": \"<Error: Too many levels of nesting to fake this schema>\",\n  \"nullable\": true\n },\n \"errors\": {}\n}"
-        },
-        {
-          "id": "2162ebd2-265c-432a-a0a2-292bd595f3a8",
-          "name": "Untitled Example",
-          "originalRequest": {
-            "method": "GET",
-            "header": [
-              {
-                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
-                "key": "cooperation-id",
-                "value": ""
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/v1/contracts/:id/additionalAgreements/model",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "v1",
-                "contracts",
-                ":id",
-                "additionalAgreements",
-                "model"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "-94312627",
-                  "description": "(Required) Идентификатор договора."
-                }
-              ]
-            }
-          },
-          "status": "Forbidden",
-          "code": 403,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "cookie": [],
-          "responseTime": null,
-          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
-        },
-        {
-          "id": "bc369813-4b62-4178-a710-b8a94532156f",
-          "name": "Untitled Example",
-          "originalRequest": {
-            "method": "GET",
-            "header": [
-              {
-                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
-                "key": "cooperation-id",
-                "value": ""
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/v1/contracts/:id/additionalAgreements/model",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "v1",
-                "contracts",
-                ":id",
-                "additionalAgreements",
-                "model"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "-94312627",
-                  "description": "(Required) Идентификатор договора."
-                }
-              ]
-            }
-          },
-          "status": "Conflict",
-          "code": 409,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "cookie": [],
-          "responseTime": null,
-          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
-        },
-        {
-          "id": "c7f17ceb-3478-4e6b-9935-9ee6f3b8fdd3",
-          "name": "Untitled Example",
-          "originalRequest": {
-            "method": "GET",
-            "header": [
-              {
-                "description": "(Required) Идентификатор вида сотрудничества субподрядчика",
-                "key": "cooperation-id",
-                "value": ""
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/v1/contracts/:id/additionalAgreements/model",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "v1",
-                "contracts",
-                ":id",
-                "additionalAgreements",
-                "model"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "-94312627",
-                  "description": "(Required) Идентификатор договора."
-                }
-              ]
-            }
-          },
-          "status": "Internal Server Error",
-          "code": 500,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "cookie": [],
-          "responseTime": null,
-          "body": "{\n \"type\": \"aliquip officia culpa\",\n \"title\": \"reprehenderit ex culpa\",\n \"status\": -84245303,\n \"detail\": \"ea\",\n \"instance\": \"Du\",\n \"extensions\": {}\n}"
-        }
-      ]
-    },
-    {
       "name": "Запрос на получение информации для работы с реестром сотрудников контрагента.",
       "event": [
         {
@@ -16954,17 +16650,7 @@
           "script": {
             "id": "e2c5dc02-d77d-4898-a828-ad9789861b81",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -17137,17 +16823,7 @@
           "script": {
             "id": "6597a0be-1936-464f-a4b0-59d4ca07f66f",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -17320,17 +16996,7 @@
           "script": {
             "id": "70dec30a-eaf5-4ec2-ba6a-0ec45c958fb5",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -17503,17 +17169,7 @@
           "script": {
             "id": "1274b978-6543-4e93-80a0-bb0cb9682165",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -17686,17 +17342,7 @@
           "script": {
             "id": "21552a7a-3322-42a5-8818-3672c0719910",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -17869,17 +17515,7 @@
           "script": {
             "id": "74b5969d-08f9-403c-8f57-8a9d9a5dc958",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -18052,17 +17688,7 @@
           "script": {
             "id": "fb98ba46-f6a0-4f83-81b6-31e2e5e055ce",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -18235,17 +17861,7 @@
           "script": {
             "id": "7d3c4dd9-c74d-49f8-812b-39f6cdfc62d8",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -18449,12 +18065,12 @@
   ],
   "variable": [
     {
-      "id": "c15dc484-1b0d-4867-b875-9218c85c8348",
+      "id": "619ac93e-be1c-4ded-a72a-e59cdaf82865",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "d98e74b8-693d-4667-a880-ad0f59e36487",
+      "id": "ccf94062-1048-4568-89f7-65ad56249504",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
