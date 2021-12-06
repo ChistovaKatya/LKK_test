@@ -4980,11 +4980,21 @@
         {
           "listen": "test",
           "script": {
-            "id": "c5c12b8a-d2bf-41d5-b1b3-86d2af8bf569",
             "exec": [
-              ""
+              "pm.test(\"Статус \" + responseCode.code, function () {\r",
+              "    pm.response.to.have.status(200)\r",
+              "    var jsonData = pm.response.json();\r",
+              "  if (!jsonData.isEmpty)\r",
+              "       {\r",
+              "            tests [\"Информация получена\"] = true\r",
+              "     }       \r",
+              "       else {\r",
+              "           tests [\"Страница пустая\"] = false\r",
+              "       }\r",
+              "});"
             ],
-            "type": "text/javascript"
+            "type": "text/javascript",
+            "id": "c5c12b8a-d2bf-41d5-b1b3-86d2af8bf569"
           }
         }
       ],
@@ -5153,11 +5163,21 @@
         {
           "listen": "test",
           "script": {
-            "id": "fa18e6ab-d023-44fb-9fd4-ea87b3c1b163",
             "exec": [
-              ""
+              "pm.test(\"Статус \" + responseCode.code, function () {\r",
+              "    pm.response.to.have.status(200)\r",
+              "    var jsonData = pm.response.json();\r",
+              "  if (!jsonData.isEmpty)\r",
+              "       {\r",
+              "            tests [\"Информация получена\"] = true\r",
+              "     }       \r",
+              "       else {\r",
+              "           tests [\"Страница пустая\"] = false\r",
+              "       }\r",
+              "});"
             ],
-            "type": "text/javascript"
+            "type": "text/javascript",
+            "id": "fa18e6ab-d023-44fb-9fd4-ea87b3c1b163"
           }
         }
       ],
@@ -17425,12 +17445,12 @@
   ],
   "variable": [
     {
-      "id": "6f0d9097-664a-4219-9971-2422bdf97ff6",
+      "id": "ec5ec811-f323-43a5-95dc-e6c357213f3a",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "bca30a68-30ab-44bc-8898-b7e7f8c44305",
+      "id": "d4ce693b-54f1-4c9b-85dd-6ac30cb9986c",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
