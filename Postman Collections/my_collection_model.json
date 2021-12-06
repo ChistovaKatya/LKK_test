@@ -18425,7 +18425,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "e80c8601-5873-4de5-9b81-e81bb877edc2",
+        "id": "e82786f8-9ff1-4111-92bf-39f78b5ac193",
         "type": "text/javascript",
         "exec": [
           "pm.globals.set(\"coop\", 1000001);"
@@ -18435,36 +18435,26 @@
     {
       "listen": "test",
       "script": {
-        "id": "4d4b2b08-1e2d-4333-aa31-e3bbb09f9e7c",
+        "id": "bbca66b8-c6cf-4a26-8b8e-67ca5c7b5226",
         "type": "text/javascript",
         "exec": [
           "status = responseCode.code",
-          "console.log(status)",
-          "if (status == 200){",
+          "if (status != 200){",
           "var jsonData = pm.response.json();",
-          "  if (!jsonData.isEmpty)",
-          "       {",
-          "            tests [\"Информация получена123\"] = true",
-          "     }       ",
-          "       else {",
-          "           tests [\"Страница пустая\"] = false",
-          "       }",
-          "}",
-          "else",
-          "jsonData = pm.response.json()",
-          "tests [\"Статус \" + status + \" TraceId (\" + jsonData.traceId + \")\"] = false"
+          "  tests [\"Статус \" + status + \" TraceId (\" + jsonData.traceId + \")\"] = false",
+          "}"
         ]
       }
     }
   ],
   "variable": [
     {
-      "id": "94fe1c20-82c5-401c-85f7-c4dda394c5f7",
+      "id": "e49d9bbf-004f-4ddc-81fb-15a6907dad4f",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "769d6f9b-2f2a-4304-a0c1-55f8756806b5",
+      "id": "95575372-4b08-4c98-abff-da64881aa495",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
