@@ -18425,32 +18425,45 @@
     {
       "listen": "prerequest",
       "script": {
+        "id": "c26ca831-b52f-4e42-9c34-7c2763d14105",
         "type": "text/javascript",
         "exec": [
           ""
-        ],
-        "id": "3afb2e9e-ba57-4fea-9be1-bd38615754c1"
+        ]
       }
     },
     {
       "listen": "test",
       "script": {
+        "id": "985eea7c-0370-4a4b-94d2-b6550ad6faa4",
         "type": "text/javascript",
         "exec": [
-          ""
-        ],
-        "id": "8ad5cacb-ecd0-47e6-94fb-e5441274cbfb"
+          "status = responseCode.code",
+          "if (status == 200){",
+          "var jsonData = pm.response.json();",
+          "  if (!jsonData.isEmpty)",
+          "       {",
+          "            tests [\"Информация получена123\"] = true",
+          "     }       ",
+          "       else {",
+          "           tests [\"Страница пустая\"] = false",
+          "       }",
+          "}",
+          "else",
+          "jsonData = pm.response.json()",
+          "tests [\"Статус \" + status + \" TraceId (\" + jsonData.traceId + \")\"] = false"
+        ]
       }
     }
   ],
   "variable": [
     {
-      "id": "5ad4713e-67db-41d9-a4bd-099eecf5d854",
+      "id": "928a70bb-4e0c-44e8-8656-5a35b9f85811",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "74188e78-a513-4b8d-b3ab-8c240eea2b31",
+      "id": "c6ab2911-2bb5-4285-ab96-7d7679d78be2",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
