@@ -781,21 +781,11 @@
         {
           "listen": "test",
           "script": {
+            "id": "7e42e8bb-8d62-41c7-bf41-98e3c2119f8e",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
-            "type": "text/javascript",
-            "id": "7e42e8bb-8d62-41c7-bf41-98e3c2119f8e"
+            "type": "text/javascript"
           }
         }
       ],
@@ -17849,17 +17839,7 @@
           "script": {
             "id": "74b5969d-08f9-403c-8f57-8a9d9a5dc958",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -18032,17 +18012,7 @@
           "script": {
             "id": "fb98ba46-f6a0-4f83-81b6-31e2e5e055ce",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -18215,17 +18185,7 @@
           "script": {
             "id": "7d3c4dd9-c74d-49f8-812b-39f6cdfc62d8",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
             "type": "text/javascript"
           }
@@ -18429,12 +18389,12 @@
   ],
   "variable": [
     {
-      "id": "5ebbac60-03ee-4fb3-b90b-3a40cffa3930",
+      "id": "de45a70b-f5f6-41a4-a5f5-7ee2a55b7a78",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "db3bd144-b0ab-4632-9168-334df64c9e84",
+      "id": "00cb52f3-1534-42a2-86a6-c668cc823dde",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
