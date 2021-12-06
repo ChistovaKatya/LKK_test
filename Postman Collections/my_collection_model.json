@@ -15550,21 +15550,11 @@
         {
           "listen": "test",
           "script": {
+            "id": "a862dc43-5a44-4065-bd37-dcaabec3027c",
             "exec": [
-              "pm.test(\"Статус \" + responseCode.code, function () {\r",
-              "    pm.response.to.have.status(200)\r",
-              "    var jsonData = pm.response.json();\r",
-              "  if (!jsonData.isEmpty)\r",
-              "       {\r",
-              "            tests [\"Информация получена\"] = true\r",
-              "     }       \r",
-              "       else {\r",
-              "           tests [\"Страница пустая\"] = false\r",
-              "       }\r",
-              "});"
+              ""
             ],
-            "type": "text/javascript",
-            "id": "a862dc43-5a44-4065-bd37-dcaabec3027c"
+            "type": "text/javascript"
           }
         }
       ],
@@ -18015,12 +18005,12 @@
   ],
   "variable": [
     {
-      "id": "6c77645e-371e-4596-b067-64d89df14f14",
+      "id": "4b4e4905-fc16-4860-8c84-01111a3c5b0c",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "aa3fc631-790e-4ef0-9f98-67a17bcd9163",
+      "id": "bf0e22f1-6dce-4172-8f3e-b3df1be325e9",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
