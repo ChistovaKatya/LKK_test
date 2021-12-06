@@ -18065,12 +18065,12 @@
   ],
   "variable": [
     {
-      "id": "619ac93e-be1c-4ded-a72a-e59cdaf82865",
+      "id": "14e7d0ac-d895-473a-bbb2-9520bd54376f",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "ccf94062-1048-4568-89f7-65ad56249504",
+      "id": "d1dd81f8-289b-4a4e-86ea-638dd0ce5b38",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
