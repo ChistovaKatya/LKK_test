@@ -18425,7 +18425,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "ef62e65b-0697-4067-a59b-51687f52a726",
+        "id": "e80c8601-5873-4de5-9b81-e81bb877edc2",
         "type": "text/javascript",
         "exec": [
           "pm.globals.set(\"coop\", 1000001);"
@@ -18435,10 +18435,11 @@
     {
       "listen": "test",
       "script": {
-        "id": "d6bd46ae-41be-4ea9-82f9-edc34160ee7e",
+        "id": "4d4b2b08-1e2d-4333-aa31-e3bbb09f9e7c",
         "type": "text/javascript",
         "exec": [
           "status = responseCode.code",
+          "console.log(status)",
           "if (status == 200){",
           "var jsonData = pm.response.json();",
           "  if (!jsonData.isEmpty)",
@@ -18458,12 +18459,12 @@
   ],
   "variable": [
     {
-      "id": "1a969981-a219-491d-b3e0-6ff584620ce9",
+      "id": "94fe1c20-82c5-401c-85f7-c4dda394c5f7",
       "key": "baseUrl",
       "value": "https://mm.srvdev.ru/contractor/api"
     },
     {
-      "id": "3a1c04e0-cef8-4e7f-a8eb-8b596a756cd7",
+      "id": "769d6f9b-2f2a-4304-a0c1-55f8756806b5",
       "key": "baseUrlTok",
       "value": "https://mm.srvdev.ru/contractor/auth"
     }
